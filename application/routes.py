@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, flash, request
 from application import app, db, bcrypt, login_manager
 from application.models import User, Diet, Food, diet_plan
-from application.forms import DietForm, FoodForm, RegistrationForm, LoginForm
+from application.forms import DietForm, FoodForm, RegistrationForm, LoginForm, UpdateAccountForm
 from flask_login import login_user, current_user, logout_user, login_required
 
 #-----------------------------------------Home-----------------------------------------------------------
@@ -83,7 +83,7 @@ def create_diet():
 
     return render_template('create_diet.html',title='Create Diet', form=form)
 
-#------------------------------------------MyDiet---------------------------------------------------------
+#------------------------------------------MyDiet--------------------------------------------------------
 #--------------------------------------------------------------------------------------------------------
 @app.route('/diets', methods=['GET','POST'])
 @login_required
@@ -137,4 +137,23 @@ def delete_food(foodID):
     db.session.commit()
 
     return redirect(url_for('food'))
+
+
+
+@app.route('/account', methods=['GET','POST'])
+@login_required
+def account():
+    form = UpdateAccountForm()
+    if form.validate_on_submit():
+        current_user.name = form.name.data
+        current_user.surname= form.surname.data
+        current_user.email=form.email.data
+        db.session.commit()
+        flash("Updated successfully", 'success')
+        return redirect(url_for('account'))
+    elif request.method == 'GET':
+        form.name.data = current_user.name
+        form.surname.data = current_user.surname
+        form.email.data = current_user.email
+    return render_template('account.html',title='Account', form=form)
 
