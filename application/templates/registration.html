@@ -7,32 +7,34 @@
         <fieldset class="form-group">
             <legend class="border-bottom mb-4">Registration</legend>
 <!--------------------------------- User Name ---------------------------------------------------->
-            <div class="form-group">
-                {{ form.name.label }}
-                {% if form.name.errors %}
-                    {{ form.name(class="form-control is-invalid") }}
-                    <div class="error">
-                        {% for error in form.name.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ form.name(class="form-control",placeholder="Name") }}
-                {% endif %}
-            </div>
-<!--------------------------------- Surname ---------------------------------------------------->
-            <div class="form-group">
-                {{ form.surname.label }}
-                {% if form.surname.errors %}
-                    {{ form.surname(class="form-control is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.surname.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ form.surname(class="form-control",placeholder="Surname") }}
-                {% endif %}
+            <div class="row">
+                <div class="col">
+                    {{ form.name.label }}
+                    {% if form.name.errors %}
+                        {{ form.name(class="form-control is-invalid") }}
+                        <div class="error">
+                            {% for error in form.name.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.name(class="form-control",placeholder="Name") }}
+                    {% endif %}
+                </div>
+    <!--------------------------------- Surname ---------------------------------------------------->
+                <div class="col">
+                    {{ form.surname.label }}
+                    {% if form.surname.errors %}
+                        {{ form.surname(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.surname.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.surname(class="form-control",placeholder="Surname") }}
+                    {% endif %}
+                </div>
             </div>
 <!--------------------------------- Email ---------------------------------------------------->
             <div class="form-group">
@@ -48,7 +50,7 @@
                     {{ form.email(class="form-control",placeholder="Email") }}
                 {% endif %}
             </div>
-<!--------------------------------- Password ---------------------------------------------------->
+    <!--------------------------------- Password ---------------------------------------------------->
             <div class="form-group">
                 {{ form.password.label }}
                 {% if form.password.errors %}
